@@ -2,43 +2,24 @@
 
 ### Przygotowanie środowiska
 
-1. W AWS Lab 
+1. Uruchomienie AWS Lab 
 
-### Architektura do zaimplementowania
+2. Pobranie lokalnie wszystkich plików ze zbioru danych [IMDb Review Dataset](https://www.kaggle.com/datasets/ebiswas/imdb-review-dataset/data) udostępnionych na platformie Kaggle.
 
-![plantuml-preparation.png](../zrzuty/plantuml-preparation.png)
-
-### Przygotowanie danych źródłowych
-
-1. Pobbranie lokalnie wszystkich plików ze zbioru danych [IMDb Review Dataset](https://www.kaggle.com/datasets/ebiswas/imdb-review-dataset/data) udostępnionych na platformie Kaggle.
-
-   ```
-   Zbiór zawiera 5.5M recenzji filmów. Zbiór jest podzielony na kilka części i zawiera również plik `sample.json, który posłuży do zbudowania rozwiązania zanim procesowanie zostanie wykonane na pełnym zbiorze.
+   Zbiór zawiera 7.78 GB recenzji filmów. Zbiór jest podzielony na 7 plików. 
    ```
 
-2. Utwórz S3 bucket z konsoli AWS. 
-   ```
-   Uruchom skrypt poniżej przez `CloudShell` lub utwórz z poziomu serwisu `Amazon S3/Buckets`
-   ```
-
-   ```shell
-   aws s3api create-bucket --bucket ${ACCOUNT_ID}-landing-zone --region us-east-1
-   ```
+3. Utwórzenie z konsoli AWS S3 2bucketów z konsoli AWS:
+   
+   ${ACCOUNT_ID}-landing-zone --region us-east-1
+   ${ACCOUNT_ID}-formatted-data --region us-east-1
+ 
 
 3. Prześlij surowe dane (plik sample.json) do nowo utworzonej ścieżki.
 
-   ![upload_to_s3.png](../zrzuty/upload_to_s3.png)
 
 ### Konwersja danych do Parquet 
 
-1. Utwórz S3 bucket dla danych wyjściowych.
-   ```
-   Uruchom skrypt poniżej przez `CloudShell` lub utwórz z poziomu serwisu `Amazon S3/Buckets`
-   ```
-   
-   ```shell
-   aws s3api create-bucket --bucket ${ACCOUNT_ID}-formatted-data --region us-east-1
-   ```
 
 2. Z serwisu `AWS Glue` uruchom zakładkę `ETL Jobs/Notebooks`
 3. Utwórz nowy skrypt
